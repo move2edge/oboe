@@ -22,7 +22,7 @@
 
 #include <sys/system_properties.h>
 
-#include "common/OboeDebug.h"
+//#include "common/OboeDebug.h"
 #include "oboe/Oboe.h"
 #include "AAudioLoader.h"
 
@@ -131,28 +131,28 @@ private:
 
         void *libHandle = AAudioLoader::getInstance()->getLibHandle();
         if (libHandle == nullptr) {
-            LOGI("%s() could not find " LIB_AAUDIO_NAME, __func__);
+            //LOGI("%s() could not find " LIB_AAUDIO_NAME, __func__);
             return AAUDIO_ERROR_UNAVAILABLE;
         }
 
         mAAudioStream_isMMap = (bool (*)(AAudioStream *stream))
                 dlsym(libHandle, FUNCTION_IS_MMAP);
         if (mAAudioStream_isMMap == nullptr) {
-            LOGI("%s() could not find " FUNCTION_IS_MMAP, __func__);
+            //LOGI("%s() could not find " FUNCTION_IS_MMAP, __func__);
             return AAUDIO_ERROR_UNAVAILABLE;
         }
 
         mAAudio_setMMapPolicy = (int32_t (*)(aaudio_policy_t policy))
                 dlsym(libHandle, FUNCTION_SET_MMAP_POLICY);
         if (mAAudio_setMMapPolicy == nullptr) {
-            LOGI("%s() could not find " FUNCTION_SET_MMAP_POLICY, __func__);
+            //LOGI("%s() could not find " FUNCTION_SET_MMAP_POLICY, __func__);
             return AAUDIO_ERROR_UNAVAILABLE;
         }
 
         mAAudio_getMMapPolicy = (aaudio_policy_t (*)())
                 dlsym(libHandle, FUNCTION_GET_MMAP_POLICY);
         if (mAAudio_getMMapPolicy == nullptr) {
-            LOGI("%s() could not find " FUNCTION_GET_MMAP_POLICY, __func__);
+            //LOGI("%s() could not find " FUNCTION_GET_MMAP_POLICY, __func__);
             return AAUDIO_ERROR_UNAVAILABLE;
         }
 
